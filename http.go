@@ -16,7 +16,8 @@ type Server struct {
 
 func (s *Server) ListenAndServe() {
 	if s.Opts.TLSKeyFile != "" || s.Opts.TLSCertFile != "" {
-		s.ServeHTTPS()
+		go s.ServeHTTPS()
+		s.ServeHTTP()
 	} else {
 		s.ServeHTTP()
 	}
